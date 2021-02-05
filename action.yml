@@ -1,0 +1,9 @@
+# action.yml
+name: 'Brandwatch Super-linter'
+description: 'Extension of github/super-linter with Brandwatch organisation specific linting rules'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'check-square'
+  color: 'white'
