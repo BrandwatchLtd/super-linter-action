@@ -247,12 +247,13 @@
     </module>
     <module name="OverloadMethodsDeclarationOrder"/>
     <module name="VariableDeclarationUsageDistance"/>
-    <module name="CustomImportOrder">
-      <property name="sortImportsInGroupAlphabetically" value="true"/>
-      <property name="separateLineBetweenGroups" value="true"/>
-      <property name="customImportOrderRules" value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS"/>
-      <property name="specialImportsRegExp" value="^com\.(runtimecollective|brandwatch|crimsonhexagon)\."/>
-      <property name="tokens" value="IMPORT, STATIC_IMPORT, PACKAGE_DEF"/>
+    <module name="ImportOrder">
+        <property name="option" value="top"/>
+        <property name="groups" value="java, javax, org, com, , com.runtimecollective, com.brandwatch"/>
+        <property name="ordered" value="true"/>
+        <property name="separated" value="true"/>
+        <property name="separatedStaticGroups" value="true"/>
+        <property name="sortStaticImportsAlphabetically" value="true"/>
     </module>
     <module name="MethodParamPad">
       <property name="tokens"
