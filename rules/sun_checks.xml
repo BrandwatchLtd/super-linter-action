@@ -249,7 +249,7 @@
     <module name="VariableDeclarationUsageDistance"/>
     <module name="ImportOrder">
         <property name="option" value="top"/>
-        <property name="groups" value="java, javax, org, com, , com.runtimecollective, com.brandwatch"/>
+        <property name="groups" value="java, javax, org, com, , com.runtimecollective, com.brandwatch, com.crimsonhexagon"/>
         <property name="ordered" value="true"/>
         <property name="separated" value="true"/>
         <property name="separatedStaticGroups" value="true"/>
