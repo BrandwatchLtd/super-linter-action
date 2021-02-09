@@ -49,3 +49,16 @@ See [Github Actions Documentation](https://docs.github.com/en/actions/reference)
 
 ## Rule X is stupid!
 If you are a Brandwatch employee and feel rules are too strict or incorrect, please feel free to raise a PR to change them. There maybe some debate as to whether your change is in line with the department's coding standards. If you are not a brandwatch employee, your opinion on our internal coding standards is considered moot and your PR will be ignored/rejected.
+
+## I want to test some rule changes against a PR.
+Simply create a branch with your rule changes on this repo or on your fork of this repository and change the repository/branch that the `Lint Code Base` step uses in your PR. E.g.
+```
+- name: Lint Code Base
+        uses: BrandwatchLtd/super-linter-action@my-branch
+```
+or
+```
+- name: Lint Code Base
+        uses: my-github-user/super-linter-action@my-branch
+```
+Your PR checks should now use the modified rules from your branch.
