@@ -7,6 +7,8 @@
     Checkstyle configuration that checks the Google coding conventions from Google Java Style
     that can be found at https://google.github.io/styleguide/javaguide.html
 
+    With modifications along the lines of the Brandwatch Java Styleguide
+
     Checkstyle is very configurable. Be sure to read the documentation at
     http://checkstyle.org (or in your downloaded distribution).
 
@@ -238,8 +240,10 @@
              value="GenericWhitespace ''{0}'' is not preceded with whitespace."/>
     </module>
     <module name="AbbreviationAsWordInName">
+      <property name="ignoreStatic" value="true"/>
       <property name="ignoreFinal" value="false"/>
       <property name="allowedAbbreviationLength" value="0"/>
+      <property name="allowedAbbreviations" value="IT,ID,XML,DTO,IO,FS,URI" />
       <property name="tokens"
                value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, ANNOTATION_DEF, ANNOTATION_FIELD_DEF,
                     PARAMETER_DEF, VARIABLE_DEF, METHOD_DEF, PATTERN_VARIABLE_DEF, RECORD_DEF,
@@ -249,7 +253,7 @@
     <module name="VariableDeclarationUsageDistance"/>
     <module name="ImportOrder">
         <property name="option" value="top"/>
-        <property name="groups" value="java, javax, org, com, , com.runtimecollective, com.brandwatch, com.crimsonhexagon"/>
+        <property name="groups" value="java, javax, org, com, *, com.runtimecollective, com.brandwatch, com.crimsonhexagon"/>
         <property name="ordered" value="true"/>
         <property name="separated" value="true"/>
         <property name="separatedStaticGroups" value="true"/>

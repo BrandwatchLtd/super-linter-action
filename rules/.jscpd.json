@@ -5,7 +5,8 @@
   ],
   "ignore": [
     "**/__snapshots__/**",
-    "**/*Test.java",
+    "**/*Test*.java",
+    "**/*IT.java",
     "**/pom.xml"
   ],
   "absolute": true
