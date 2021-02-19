@@ -1,6 +1,51 @@
 # action.yml
 name: 'Brandwatch Super-linter'
 description: 'Extension of github/super-linter with Brandwatch organisation specific linting rules'
+inputs:
+  github_token:
+    description: 'GITHUB_TOKEN.'
+    required: true
+    default: '${{ github.token }}'
+  level:
+    description: 'Report level for reviewdog [info,warning,error]'
+    required: false
+    default: 'info'
+  reporter:
+    description: 'Reporter of reviewdog command [github-pr-check,github-pr-review]'
+    required: false
+    default: 'github-pr-review'
+  filter_mode:
+    description: |
+      Filtering for the reviewdog command [added,diff_context,file,nofilter].
+      Default is `added`.
+    required: false
+    default: 'added'
+  fail_on_error:
+    description: |
+      Exit code for reviewdog when errors are found [true,false]
+      Default is `false`.
+    required: false
+    default: 'false'
+  checkstyle_config:
+    description: 'Checkstyle config file'
+    required: true
+    default: 'google_checks.xml'
+  checkstyle_version:
+    description: 'Checkstyle version'
+    required: false
+    default: '8.37'
+  workdir:
+    description: 'Working directory relative to the root directory.'
+    required: false
+    default: '.'
+  tool_name:
+    description: 'Tool name to use for reviewdog reporter'
+    required: false
+    default: 'reviewdog'
+  properties_file:
+    description: 'Properties file relative to the root directory.'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
