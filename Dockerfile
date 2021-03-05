@@ -1,4 +1,4 @@
-FROM github/super-linter
+FROM github/super-linter:v3.15.1
 COPY rules/ /rules/
 COPY entrypoint.sh /entrypoint.sh
 

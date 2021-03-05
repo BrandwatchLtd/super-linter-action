@@ -14,4 +14,8 @@ echo "Workspace path: $GITHUB_WORKSPACE"
 RELATIVE_RULES_PATH=$(realpath --relative-to=${GITHUB_WORKSPACE} /rules/)
 echo "Rules path relative to workspace: $RELATIVE_RULES_PATH"
 export LINTER_RULES_PATH=$RELATIVE_RULES_PATH
+echo "Debugging Git Start!!!!!!!!!!!!!!!!!!!!"
+git branch -a
+git --no-pager log --oneline | head -n 20
+echo "Debugging Git End!!!!!!!!!!!!!!!!!!!!"
 /action/lib/linter.sh
