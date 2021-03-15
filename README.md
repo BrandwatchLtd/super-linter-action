@@ -47,6 +47,21 @@ jobs:
 ```
 See [Github Actions Documentation](https://docs.github.com/en/actions/reference) for more detail or help with different configuration.
 
+## A note on disabling linters for specific lines of code
+Some linters support suppressing rules directly in the file OOTB, some do not. E.g. hadolint allows the user to add a comment like `# hadolint ignore=DL4006` above the line they want the linting check suppressed for.
+For checkstyle this is enabled using the `SuppressWithPlainTextCommentFilter` module which has been configured to allow the use of comments to temporarily disable/enable modules.
+```
+//CheckStyleOff: AbbreviationAsWordInName
+String myHTTPURL = "http://myurl.com";
+//CheckStyleOn: AbbreviationAsWordInName
+```
+Multiple module names can be specified as pipe separated strings 
+```
+//CheckStyleOff: LineLength|AbbreviationAsWordInName
+String myHTTPURL = "http://some-long-stuff-some-long-stuff-some-long-stuff-some-long-stuff-some-long-stuff-some-long-stuff-some-long-stuff-some-long-stuff-some-long-stuff.com";
+//CheckStyleOn: LineLength|AbbreviationAsWordInName
+```
+
 ## Rule X is stupid!
 If you are a Brandwatch employee and feel rules are too strict or incorrect, please feel free to raise a PR to change them. There maybe some debate as to whether your change is in line with the department's coding standards. If you are not a brandwatch employee, your opinion on our internal coding standards is considered moot and your PR will be ignored/rejected.
 
