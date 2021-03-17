@@ -20,10 +20,8 @@ All you need to do is add a `linter.yml` file to the `.github/workflows/` direct
 name: Lint Code Base
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, main, develop ]
 
 jobs:
   build:
@@ -41,8 +39,8 @@ jobs:
       - name: Lint Code Base
         uses: BrandwatchLtd/super-linter-action@HEAD #@HEAD ensures you always use the latest rules
         env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: master
+          VALIDATE_ALL_CODEBASE: false #prevent validating files that are not part of the PR
+          DEFAULT_BRANCH: ${{ github.base_ref }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 See [Github Actions Documentation](https://docs.github.com/en/actions/reference) for more detail or help with different configuration.
@@ -63,7 +61,7 @@ String myHTTPURL = "http://some-long-stuff-some-long-stuff-some-long-stuff-some-
 ```
 
 ## Rule X is stupid!
-If you are a Brandwatch employee and feel rules are too strict or incorrect, please feel free to raise a PR to change them. There maybe some debate as to whether your change is in line with the department's coding standards. If you are not a brandwatch employee, your opinion on our internal coding standards is considered moot and your PR will be ignored/rejected.
+If you are a Brandwatch employee and feel rules are too strict or incorrect, please feel free to raise a PR to change them. There maybe some debate whether your change is in line with the department's coding standards. If you are not a brandwatch employee, your opinion on our internal coding standards is considered moot and your PR will be ignored/rejected.
 
 ## I want to test some rule changes against a PR.
 Simply create a branch with your rule changes on this repo or on your fork of this repository and change the repository/branch that the `Lint Code Base` step uses in your PR. E.g.
@@ -71,7 +69,7 @@ Simply create a branch with your rule changes on this repo or on your fork of th
 - name: Lint Code Base
         uses: BrandwatchLtd/super-linter-action@my-branch
 ```
-or
+or if your changes to the linter are on a fork
 ```
 - name: Lint Code Base
         uses: my-github-user/super-linter-action@my-branch
