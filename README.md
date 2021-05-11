@@ -94,6 +94,30 @@ Running will lint the entire codebase which may take some time for larger reposi
 For more details of available config the documentation on super-linter should apply
 https://github.com/github/super-linter/blob/master/docs/run-linter-locally.md
 
+### Jeez, do I have to run it for the entire codebase?
+Technically no but super-linter doesn't have great support for that. It can be done though.
+
+To run it against a single file you can do:
+```
+docker run -e RUN_LOCAL=true \
+-v <PATH_TO_LOCAL_CODEBASE>/src/main/java/com/brandwatch/MyClass.java:/tmp/lint/src/main/java/com/brandwatch/MyClass.java \
+-v <PATH_TO_LOCAL_CODEBASE>/.git/:/tmp/lint/.git/ \
+super-linter-action
+```
+You could of course also mount in a single package or module like this:
+```
+docker run -e RUN_LOCAL=true \
+-v <PATH_TO_LOCAL_CODEBASE>/src/main/java/com/brandwatch/package:/tmp/lint/src/main/java/com/brandwatch/package \
+-v <PATH_TO_LOCAL_CODEBASE>/.git/:/tmp/lint/.git/ \
+super-linter-action
+```
+Its important to note that you need to mount the `.git` directory and that the path either side of the volume mount argument must match. E.g.
+```
+/local/path/to/repo/the-a-directory-in-repo/file.txt:/tmp/lint/the-a-directory-in-repo/file.txt
+```
+
+I am yet to work out how to run against only the diff to master.
+
 ## Using the Checkstyle rules in Intellij
 While checkstyle is only one of the many linters that are run by this action it, as much of the code we work 
 with is Java it can be useful to run checkstyle directly in the IDE to get realtime feedback on rule violations.
