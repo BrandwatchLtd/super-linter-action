@@ -79,11 +79,11 @@ Your PR checks should now use the modified rules from your branch.
 ## Running Brandwatch Superlinter Action Locally
 You can pull this repository locally and build a docker image of the Brandwatch Sueprlinter Action with
 ```
-docker build -t BrandwatchLtd/super-linter-action .
+docker build -t super-linter-action .
 ```
 You can then run it against a local codebase using 
 ```
-docker run -e RUN_LOCAL=true -v <PATH_TO_LOCAL_CODEBASE>:/tmp/lint BrandwatchLtd/super-linter-action
+docker run -e RUN_LOCAL=true -v <PATH_TO_LOCAL_CODEBASE>:/tmp/lint super-linter-action
 ```
 The `-v` flag mounts a local directory within the superlinter docker container. You should replace 
 `<PATH_TO_LOCAL_CODEBASE>` with the local path to the codebase you want to lint. Do not change the `/tmp/lint` 
