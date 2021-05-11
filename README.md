@@ -93,3 +93,14 @@ Running will lint the entire codebase which may take some time for larger reposi
 
 For more details of available config the documentation on super-linter should apply
 https://github.com/github/super-linter/blob/master/docs/run-linter-locally.md
+
+## Using the Checkstyle rules in Intellij
+While checkstyle is only one of the many linters that are run by this action it, as much of the code we work 
+with is Java it can be useful to run checkstyle directly in the IDE to get realtime feedback on rule violations.
+
+You can add the checkstyle plugin and point it to the checkstyle rules file in this repo. In Intellij do the following:
+
+Intellij > Preferences > Plugins > Search for "CheckStyle - IDEA". Install the plugin.
+Intellij > Preferences > Toools > Checkstyle 
+Add a configuration file with this url: `https://raw.githubusercontent.com/BrandwatchLtd/super-linter-action/main/rules/sun_checks.xml`
+Ensure the Checkstyle version is set to 8.39 and the scope is set to include tests.
