@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -eu
+
+UPSTREAM=${1:origin}
+
+SUPER_LINTER_DIR=$(echo ${BASH_SOURCE[0]} | sed 's/\/superlint//')
+
+echo "rebuilding the super-linter image..."
+docker build -t super-linter $SUPER_LINTER_DIR >/dev/null
+
+GIT_ROOT=$(git rev-parse --show-toplevel)
+MAIN_BRANCH=$(git remote show $UPSTREAM | grep "HEAD branch" | sed 's/.*: //')
+MOUNTS="-v ${GIT_ROOT}/.git:/tmp/lint/.git"
+echo "super-linter will lint the following files:"
+for FILE in $(git diff --name-only $MAIN_BRANCH);
+do
+	echo "    ${GIT_ROOT}/${FILE}"
+	MOUNTS="$MOUNTS -v ${GIT_ROOT}/${FILE}:/tmp/lint/${FILE}"
+done
+
+docker run -e LOG_LEVEL=ERROR -e RUN_LOCAL=true $MOUNTS super-linter
