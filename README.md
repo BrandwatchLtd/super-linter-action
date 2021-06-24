@@ -116,7 +116,19 @@ Its important to note that you need to mount the `.git` directory and that the p
 /local/path/to/repo/the-a-directory-in-repo/file.txt:/tmp/lint/the-a-directory-in-repo/file.txt
 ```
 
-I am yet to work out how to run against only the diff to master.
+### Well, what if I just want to lint the current changes from the upstream main branch?
+No worries, we've got your back! Add this repo to your path, e.g. for bash users:
+```bash
+# Run this from the directory this README.md is in.
+echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
+source ~/.bashrc
+```
+and then run `superlint` from anywhere within a git repository to lint the changes from the remotes HEAD branch!
+By default this will assume the remotes name is `origin`.
+If you wish to target a remote repository with a different name, simply pass in the name as a positional parameter, e.g. for a remote named `upstream`:
+```bash
+superlint upstream
+```
 
 ## Using the Checkstyle rules in Intellij
 While checkstyle is only one of the many linters that are run by this action it, as much of the code we work 
