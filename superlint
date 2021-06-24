@@ -2,7 +2,7 @@
 
 set -eu
 
-UPSTREAM=${1:origin}
+UPSTREAM=${1:-origin}
 
 SUPER_LINTER_DIR=$(echo ${BASH_SOURCE[0]} | sed 's/\/superlint//')
 
