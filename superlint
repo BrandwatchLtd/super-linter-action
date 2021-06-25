@@ -9,12 +9,14 @@ show_help() {
   Usage:
   $(cmd) [OPTION...]
   -r, --remote; Set remote to diff against when determining which files to lint
+  -b, --branch; Set the base remote branch to diff against, default is the HEAD branch
   -a, --lint-all; Ignore diff and lint entire code base
   " | column -t -s ";"
 }
 
 UPSTREAM=origin
 LINT_ALL=false
+BRANCH=
 
 while test $# -gt 0; do
     case "$1" in
@@ -28,6 +30,15 @@ while test $# -gt 0; do
                 shift
             else
                 echo 'ERROR: "--remote" requires a non-empty option argument.'
+                exit 1
+            fi
+            ;;
+        -b|--branch)
+            if [ "$2" ]; then
+                BRANCH=$2
+                shift
+            else
+                echo 'ERROR: "--branch" requires a non-empty option argument.'
                 exit 1
             fi
             ;;
@@ -52,14 +63,15 @@ echo "rebuilding the super-linter image..."
 docker build -t super-linter $SUPER_LINTER_DIR >/dev/null
 
 GIT_ROOT=$(git rev-parse --show-toplevel)
-MAIN_BRANCH=$(git remote show $UPSTREAM | grep "HEAD branch" | sed 's/.*: //')
+MAIN_BRANCH=${BRANCH:-$(git remote show $UPSTREAM | grep "HEAD branch" | sed 's/.*: //')}
 if ${LINT_ALL}; then
   MOUNTS="-v ${GIT_ROOT}:/tmp/lint/"
   echo "super-linter will lint all files in: $GIT_ROOT"
 else
   MOUNTS="-v ${GIT_ROOT}/.git:/tmp/lint/.git"
   echo "super-linter will lint the following files:"
-  for FILE in $(git diff --name-only $MAIN_BRANCH);
+  DIFF=$(git diff --name-only $MAIN_BRANCH)
+  for FILE in $DIFF;
   do
     echo "    ${GIT_ROOT}/${FILE}"
     MOUNTS="$MOUNTS -v ${GIT_ROOT}/${FILE}:/tmp/lint/${FILE}"

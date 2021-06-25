@@ -83,25 +83,24 @@ Add this repo to your path, e.g. for bash users:
 echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
 source ~/.bashrc
 ```
-and then run `superlint` from anywhere within a git repository to lint the changes from the remotes HEAD branch!
+Then run `superlint` from anywhere within a git repository to lint the changes from the remotes HEAD branch!
 By default, this will assume the remotes name is `origin`.
 If you wish to target a remote repository with a different name, simply pass in the remote name using the `--remote` 
 named parameter (or `-r` for short), e.g. for a remote named `upstream`:
 ```bash
 superlint --remote upstream
 ```
-or
+
+To override the branch being used for determining the files that have changed you can specify the `--branch` named 
+parameter (`-b` for short). e.g. to diff against the remote's `awesome-feature` branch do
 ```bash
-superlint -r upstream
+superlint --branch awesome-feature
 ```
+
 By default, only changed files will be linted, however this can be overridden to lint all files by passing in 
 the `--lint-all` flag (`-a` for short). e.g.
 ```bash
 superlint --lint-all
-```
-or
-```bash
-superlint -a
 ```
 ## Using the Checkstyle rules in Intellij
 While checkstyle is only one of the many linters that are run by this action it, as much of the code we work 
