@@ -2,7 +2,49 @@
 
 set -eu
 
-UPSTREAM=${1:-origin}
+cmd(){ echo $(basename $0); }
+
+show_help() {
+  echo "\
+  Usage:
+  $(cmd) [OPTION...]
+  -r, --remote; Set remote to diff against when determining which files to lint
+  -a, --lint-all; Ignore diff and lint entire code base
+  " | column -t -s ";"
+}
+
+UPSTREAM=origin
+LINT_ALL=false
+
+while test $# -gt 0; do
+    case "$1" in
+        -h|-\?|--help)
+            show_help
+            exit
+            ;;
+        -r|--remote)
+            if [ "$2" ]; then
+                UPSTREAM=$2
+                shift
+            else
+                echo 'ERROR: "--remote" requires a non-empty option argument.'
+                exit 1
+            fi
+            ;;
+        -a|--lint-all)
+            LINT_ALL=true
+            ;;
+        --) # End of all options.
+            shift
+            break
+            ;;
+        -?*)
+            printf 'WARN: Unknown option (ignored): %s\n' "$1" >&2
+            ;;
+    esac
+
+    shift
+done
 
 SUPER_LINTER_DIR=$(echo ${BASH_SOURCE[0]} | sed 's/\/superlint//')
 
@@ -11,12 +53,17 @@ docker build -t super-linter $SUPER_LINTER_DIR >/dev/null
 
 GIT_ROOT=$(git rev-parse --show-toplevel)
 MAIN_BRANCH=$(git remote show $UPSTREAM | grep "HEAD branch" | sed 's/.*: //')
-MOUNTS="-v ${GIT_ROOT}/.git:/tmp/lint/.git"
-echo "super-linter will lint the following files:"
-for FILE in $(git diff --name-only $MAIN_BRANCH);
-do
-	echo "    ${GIT_ROOT}/${FILE}"
-	MOUNTS="$MOUNTS -v ${GIT_ROOT}/${FILE}:/tmp/lint/${FILE}"
-done
+if ${LINT_ALL}; then
+  MOUNTS="-v ${GIT_ROOT}:/tmp/lint/"
+  echo "super-linter will lint all files in: $GIT_ROOT"
+else
+  MOUNTS="-v ${GIT_ROOT}/.git:/tmp/lint/.git"
+  echo "super-linter will lint the following files:"
+  for FILE in $(git diff --name-only $MAIN_BRANCH);
+  do
+    echo "    ${GIT_ROOT}/${FILE}"
+    MOUNTS="$MOUNTS -v ${GIT_ROOT}/${FILE}:/tmp/lint/${FILE}"
+  done
+fi
 
 docker run -e LOG_LEVEL=ERROR -e RUN_LOCAL=true $MOUNTS super-linter
