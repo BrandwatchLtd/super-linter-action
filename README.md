@@ -77,59 +77,31 @@ or if your changes to the linter are on a fork
 Your PR checks should now use the modified rules from your branch.
 
 ## Running Brandwatch Superlinter Action Locally
-You can pull this repository locally and build a docker image of the Brandwatch Sueprlinter Action with
-```
-docker build -t super-linter-action .
-```
-You can then run it against a local codebase using 
-```
-docker run -e RUN_LOCAL=true -v <PATH_TO_LOCAL_CODEBASE>:/tmp/lint super-linter-action
-```
-The `-v` flag mounts a local directory within the superlinter docker container. You should replace 
-`<PATH_TO_LOCAL_CODEBASE>` with the local path to the codebase you want to lint. Do not change the `/tmp/lint` 
-part (that's where superlinter by default looks for the code within the docker container)
-
-Running will lint the entire codebase which may take some time for larger repositories.
-
-For more details of available config the documentation on super-linter should apply
-https://github.com/github/super-linter/blob/master/docs/run-linter-locally.md
-
-### Jeez, do I have to run it for the entire codebase?
-Technically no but super-linter doesn't have great support for that. It can be done though.
-
-To run it against a single file you can do:
-```
-docker run -e RUN_LOCAL=true \
--v <PATH_TO_LOCAL_CODEBASE>/src/main/java/com/brandwatch/MyClass.java:/tmp/lint/src/main/java/com/brandwatch/MyClass.java \
--v <PATH_TO_LOCAL_CODEBASE>/.git/:/tmp/lint/.git/ \
-super-linter-action
-```
-You could of course also mount in a single package or module like this:
-```
-docker run -e RUN_LOCAL=true \
--v <PATH_TO_LOCAL_CODEBASE>/src/main/java/com/brandwatch/package:/tmp/lint/src/main/java/com/brandwatch/package \
--v <PATH_TO_LOCAL_CODEBASE>/.git/:/tmp/lint/.git/ \
-super-linter-action
-```
-Its important to note that you need to mount the `.git` directory and that the path either side of the volume mount argument must match. E.g.
-```
-/local/path/to/repo/the-a-directory-in-repo/file.txt:/tmp/lint/the-a-directory-in-repo/file.txt
-```
-
-### Well, what if I just want to lint the current changes from the upstream main branch?
-No worries, we've got your back! Add this repo to your path, e.g. for bash users:
+Add this repo to your path, e.g. for bash users:
 ```bash
 # Run this from the directory this README.md is in.
 echo "export PATH=\$PATH:$(pwd)" >> ~/.bashrc
 source ~/.bashrc
 ```
-and then run `superlint` from anywhere within a git repository to lint the changes from the remotes HEAD branch!
-By default this will assume the remotes name is `origin`.
-If you wish to target a remote repository with a different name, simply pass in the name as a positional parameter, e.g. for a remote named `upstream`:
+Then run `superlint` from anywhere within a git repository to lint the changes from the remotes HEAD branch!
+By default, this will assume the remotes name is `origin`.
+If you wish to target a remote repository with a different name, simply pass in the remote name using the `--remote` 
+named parameter (or `-r` for short), e.g. for a remote named `upstream`:
 ```bash
-superlint upstream
+superlint --remote upstream
 ```
 
+To override the branch being used for determining the files that have changed you can specify the `--branch` named 
+parameter (`-b` for short). e.g. to diff against the remote's `awesome-feature` branch do
+```bash
+superlint --branch awesome-feature
+```
+
+By default, only changed files will be linted, however this can be overridden to lint all files by passing in 
+the `--lint-all` flag (`-a` for short). e.g.
+```bash
+superlint --lint-all
+```
 ## Using the Checkstyle rules in Intellij
 While checkstyle is only one of the many linters that are run by this action it, as much of the code we work 
 with is Java it can be useful to run checkstyle directly in the IDE to get realtime feedback on rule violations.
