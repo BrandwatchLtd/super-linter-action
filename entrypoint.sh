@@ -13,5 +13,11 @@ fi
 echo "Workspace path: $GITHUB_WORKSPACE"
 RELATIVE_RULES_PATH=$(realpath --relative-to=${GITHUB_WORKSPACE} /rules/)
 echo "Rules path relative to workspace: $RELATIVE_RULES_PATH"
+
+if -f ${GITHUB_WORKSPACE}/.github/linter; then
+    echo "Copying over repo-level rule overrides from ${GITHUB_WORKSPACE}/.github/linter"
+    cp ${GITHUB_WORKSPACE}/.github/linter/* /rules/
+fi
+
 export LINTER_RULES_PATH=$RELATIVE_RULES_PATH
 /action/lib/linter.sh
