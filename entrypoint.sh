@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-RUN_LOCAL="${RUN_LOCAL}" 
+RUN_LOCAL="${RUN_LOCAL}"
 
 if [ -z "${RUN_LOCAL}" ]; then
     RUN_LOCAL='false'
