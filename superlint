@@ -78,4 +78,5 @@ else
   done
 fi
 
-docker run -e LOG_LEVEL=ERROR -e RUN_LOCAL=true $MOUNTS super-linter
+echo "--- Running super-linter"
+exec docker run --rm -e LOG_LEVEL=ERROR -e RUN_LOCAL=true $MOUNTS super-linter
