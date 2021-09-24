@@ -132,4 +132,4 @@ You can add the checkstyle plugin and point it to the checkstyle rules file in t
 * Intellij > Preferences > Plugins > Search for "CheckStyle - IDEA". Install the plugin.
 * Intellij > Preferences > Toools > Checkstyle
 * Add a configuration file with this url: `https://raw.githubusercontent.com/BrandwatchLtd/super-linter-action/main/rules/sun_checks.xml`
-* Ensure the Checkstyle version is set to 8.39 and the scope is set to include tests.
+* Ensure the Checkstyle version is set to at least 8.42 and the scope is set to include tests.
