@@ -19,7 +19,7 @@
   "no-homogenous-tags": "on",
   "one-space-between-tags": "on",
   "no-unused-variables": "on",
-  "no-background-only-scenario": "on",
+  "no-background-only-scenario": "off",
   "no-empty-background": "on",
   "scenario-size": ["on", { "steps-length": {"Background": 15, "Scenario": 15}}]
 }
