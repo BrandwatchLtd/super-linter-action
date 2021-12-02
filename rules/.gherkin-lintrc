@@ -8,7 +8,7 @@
   "indentation": "off",
   "no-trailing-spaces": "on",
   "new-line-at-eof": ["on", "yes"],
-  "no-multiple-empty-lines": "on",
+  "no-multiple-empty-lines": "off",
   "no-empty-file": "on",
   "no-scenario-outlines-without-examples": "on",
   "name-length": ["on", {"Feature": 80, "Scenario": 140, "Step": 140}],
