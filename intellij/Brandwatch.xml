@@ -24,8 +24,8 @@
     </formatting-settings>
   </DBN-SQL>
   <JavaCodeStyleSettings>
-    <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="100" />
-    <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="100" />
+    <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="9999" />
+    <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="9999" />
     <option name="PACKAGES_TO_USE_IMPORT_ON_DEMAND">
       <value />
     </option>

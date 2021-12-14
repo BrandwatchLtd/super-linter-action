@@ -127,9 +127,12 @@ superlint --lint-all
 While checkstyle is only one of the many linters that are run by this action it, as much of the code we work
 with is Java it can be useful to run checkstyle directly in the IDE to get realtime feedback on rule violations.
 
-You can add the checkstyle plugin and point it to the checkstyle rules file in this repo. In Intellij do the following:
+You can add the checkstyle plugin and point it to the checkstyle rules file in this repo. In IntelliJ do the following:
 
-* Intellij > Preferences > Plugins > Search for "CheckStyle - IDEA". Install the plugin.
-* Intellij > Preferences > Toools > Checkstyle
+* IntelliJ > Preferences > Plugins > Search for "CheckStyle - IDEA". Install the plugin.
+* IntelliJ > Preferences > Tools > Checkstyle
 * Add a configuration file with this url: `https://raw.githubusercontent.com/BrandwatchLtd/super-linter-action/main/rules/sun_checks.xml`
 * Ensure the Checkstyle version is set to at least 8.42 and the scope is set to include tests.
+
+### IntelliJ Configs 
+Find them [here](intellij/README.md)
