@@ -6,6 +6,7 @@ COPY entrypoint.sh /entrypoint.sh
 ENV VALIDATE_DOCKERFILE=false
 ENV VALIDATE_KUBERNETES_KUBEVAL=false
 ENV VALIDATE_JSCPD=false
+ENV VALIDATE_PYTHON_BLACK=false
 
 CMD ["chmod", "+x", "/entrypoint.sh"]
 ENTRYPOINT ["/entrypoint.sh"]
