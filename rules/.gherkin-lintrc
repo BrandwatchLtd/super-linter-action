@@ -13,7 +13,6 @@
   "no-scenario-outlines-without-examples": "on",
   "name-length": ["on", {"Feature": 80, "Scenario": 140, "Step": 140}],
   "no-restricted-tags": ["on", {"tags": ["@watch", "@wip"]}],
-  "use-and": "on",
   "no-duplicate-tags": "on",
   "no-superfluous-tags": "on",
   "no-homogenous-tags": "on",
