@@ -135,4 +135,4 @@ You can add the checkstyle plugin and point it to the checkstyle rules file in t
 * Ensure the Checkstyle version is set to at least 8.42 and the scope is set to include tests.
 
 ### IntelliJ Configs 
-Find them [here](intellij/README.md)
+Find them [here](ide-config/intellij/README.md)
