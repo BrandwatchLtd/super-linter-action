@@ -1,0 +1,3 @@
+#!cfg
+[sqlfluff]
+dialect = postgres
