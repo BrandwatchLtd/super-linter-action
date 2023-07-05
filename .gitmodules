@@ -1,0 +1,4 @@
+[submodule "intellij-settings"]
+	path = intellij-settings
+	url = git@github.com:brandwatch/intellij-settings.git
+	branch = master
