@@ -67,5 +67,9 @@
   </editorconfig>
   <codeStyleSettings language="JAVA">
     <option name="RIGHT_MARGIN" value="140" />
+    <option name="BINARY_OPERATION_SIGN_ON_NEXT_LINE" value="true" />
+    <indentOptions>
+      <option name="CONTINUATION_INDENT_SIZE" value="4" />
+    </indentOptions>
   </codeStyleSettings>
 </code_scheme>
