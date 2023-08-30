@@ -1,3 +1,4 @@
 #!cfg
 [sqlfluff]
 dialect = postgres
+templater = placeholder
