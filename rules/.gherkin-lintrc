@@ -11,7 +11,7 @@
   "no-multiple-empty-lines": "off",
   "no-empty-file": "on",
   "no-scenario-outlines-without-examples": "on",
-  "name-length": ["on", {"Feature": 80, "Scenario": 140, "Step": 200}],
+  "name-length": ["on", {"Feature": 80, "Scenario": 140, "Step": 240}],
   "no-restricted-tags": ["on", {"tags": ["@watch", "@wip"]}],
   "no-duplicate-tags": "on",
   "no-superfluous-tags": "on",
