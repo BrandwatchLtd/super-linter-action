@@ -1,4 +1,4 @@
-FROM github/super-linter:slim-v4.10.1
+FROM mundialis/super-linter:latest
 COPY rules/ /rules/
 COPY entrypoint.sh /entrypoint.sh
 
