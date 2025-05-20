@@ -1,4 +1,4 @@
-FROM mundialis/super-linter:latest
+FROM ghcr.io/super-linter/super-linter:v7.4.0
 COPY rules/ /rules/
 COPY entrypoint.sh /entrypoint.sh
 
