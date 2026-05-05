@@ -71,10 +71,17 @@ else
   MOUNTS="-v ${GIT_ROOT}/.git:/tmp/lint/.git"
   echo "super-linter will lint the following files:"
   DIFF=$(git diff --name-only $MAIN_BRANCH)
+  WORKFLOWS_MOUNTED=false
   for FILE in $DIFF;
   do
     echo "    ${GIT_ROOT}/${FILE}"
-    MOUNTS="$MOUNTS -v ${GIT_ROOT}/${FILE}:/tmp/lint/${FILE}"
+    # Mount entire .github/workflows/ directory if any workflow file changed (actionlint needs this to resolve references)
+    if [[ "$FILE" == .github/workflows/* ]] && [ "$WORKFLOWS_MOUNTED" = false ]; then
+      MOUNTS="$MOUNTS -v ${GIT_ROOT}/.github/workflows:/tmp/lint/.github/workflows"
+      WORKFLOWS_MOUNTED=true
+    elif [[ "$FILE" != .github/workflows/* ]]; then
+      MOUNTS="$MOUNTS -v ${GIT_ROOT}/${FILE}:/tmp/lint/${FILE}"
+    fi
   done
 fi
 
