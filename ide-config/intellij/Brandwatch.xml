@@ -49,6 +49,8 @@
         <emptyLine />
         <package name="com.crimsonhexagon" withSubpackages="true" static="false" />
         <emptyLine />
+        <package name="com.cision" withSubpackages="true" static="false" />
+        <emptyLine />
       </value>
     </option>
   </JavaCodeStyleSettings>
